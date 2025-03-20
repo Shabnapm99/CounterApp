@@ -1,7 +1,16 @@
-import React,{useState}from 'react'
+import React,{useState,useEffect}from 'react'
 
 function CounterComponent() {
-    const [count,setCount] = useState(0)
+    // const [count,setCount] = useState(0)
+     // Load counter value from LocalStorage or default to 0
+  const [count, setCount] = useState(() => {
+    return Number(localStorage.getItem("counter")) || 0;
+  });
+
+  // Update LocalStorage whenever counter changes
+  useEffect(() => {
+    localStorage.setItem("counter", count);
+  }, [count]);
   return (
     <div className="container">
         <div className="row justify-content-center align-items-center vh-100">
